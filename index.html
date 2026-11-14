@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko zAy - Aplikasi Kasir Desktop</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0d1117; color: #c9d1d9; padding: 40px 20px; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        /* Header Produk */
+        .header-section { display: flex; align-items: center; gap: 20px; margin-bottom: 30px; }
+        .logo-box { background: linear-gradient(135deg, #800000, #ffc400); color: #fff; width: 80px; height: 80px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .app-title h1 { font-size: 32px; color: #ffffff; margin-bottom: 5px; }
+        .app-title p { color: #8b949e; font-size: 15px; }
+
+        /* Panel Utama Unduh & Meta */
+        .download-panel { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 30px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 30px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+        .btn-download { background-color: #238636; color: #ffffff; padding: 16px 36px; font-size: 18px; font-weight: bold; text-decoration: none; border-radius: 8px; text-align: center; transition: 0.2s; box-shadow: 0 4px 10px rgba(35,134,54,0.4); }
+        .btn-download:hover { background-color: #2ea043; transform: translateY(-2px); }
+        .btn-subtext { display: block; font-size: 12px; font-weight: normal; color: #8b949e; margin-top: 4px; }
+        
+        .meta-info { display: flex; gap: 40px; }
+        .meta-item span { display: block; font-size: 12px; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; }
+        .meta-item strong { font-size: 16px; color: #f0f6fc; }
+
+        /* Navigasi Tab */
+        .tabs { display: flex; border-bottom: 1px solid #30363d; margin-bottom: 25px; gap: 30px; }
+        .tab-btn { background: none; border: none; color: #8b949e; font-size: 16px; font-weight: 600; padding-bottom: 12px; cursor: pointer; position: relative; transition: 0.2s; }
+        .tab-btn.active { color: #58a6ff; }
+        .tab-btn.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 3px; background-color: #58a6ff; border-radius: 2px 2px 0 0; }
+        .tab-btn:hover { color: #c9d1d9; }
+
+        /* Konten Tab */
+        .tab-content { display: none; background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 30px; min-height: 180px; }
+        .tab-content.active { display: block; }
+        .tab-content h3 { color: #ffffff; margin-bottom: 15px; font-size: 20px; }
+        .tab-content p, .tab-content li { color: #8b949e; margin-bottom: 10px; }
+        .tab-content ul { padding-left: 20px; }
+
+        /* Footer */
+        .footer { text-align: center; margin-top: 40px; font-size: 13px; color: #8b949e; border-top: 1px solid #30363d; padding-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Header -->
+        <div class="header-section">
+            <div class="logo-box">zAy</div>
+            <div class="app-title">
+                <h1>Toko zAy</h1>
+                <p>Aplikasi kasir desktop untuk Windows. Cepat, akurat, dan mudah digunakan.</p>
+            </div>
+        </div>
+
+        <!-- Panel Unduh -->
+        <div class="download-panel">
+            <a href="https://github.com/zay2908/Aplikasi-kasir-toko-zAy-/releases/download/v1.0.0/zAytoko-installer.exe" class="btn-download">
+                Unduh
+                <span class="btn-subtext">zAytoko-installer.exe, sekitar 2.3 MB</span>
+            </a>
+            <div class="meta-info">
+                <div class="meta-item">
+                    <span>Versi</span>
+                    <strong>1.0.0</strong>
+                </div>
+                <div class="meta-item">
+                    <span>Sistem</span>
+                    <strong>Windows 10 & 11</strong>
+                </div>
+                <div class="meta-item">
+                    <span>Bahasa</span>
+                    <strong>Indonesia</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navigasi -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'ringkasan')">Ringkasan</button>
+            <button class="tab-btn card" onclick="switchTab(event, 'fitur')">Fitur</button>
+            <button class="tab-btn" onclick="switchTab(event, 'carapasang')">Cara Pasang</button>
+        </div>
+
+        <!-- Konten: Ringkasan -->
+        <div id="ringkasan" class="tab-content active">
+            <h3>Tentang Toko zAy</h3>
+            <p>Toko zAy adalah aplikasi kasir berbasis Java Swing yang dirancang khusus untuk memudahkan proses pencatatan transaksi toko harian. Kasir dapat memasukkan kode barang, aplikasi secara otomatis menghitung total harga serta uang kembalian, dan struk belanja dapat dicetak atau disimpan dengan praktis.</p>
+        </div>
+
+        <!-- Konten: Fitur -->
+        <div id="fitur" class="tab-content">
+            <h3>Fitur Utama Aplikasi</h3>
+            <ul>
+                <li>Input kode barang dan jumlah pembelian secara instan.</li>
+                <li>Perhitungan otomatis total belanja dan kembalian pelanggan.</li>
+                <li>Manajemen data transaksi penjualan yang rapi.</li>
+                <li>Antarmuka ramah pengguna (*user-friendly*) berbasis Java Desktop GUI.</li>
+            </ul>
+        </div>
+
+        <!-- Konten: Cara Pasang -->
+        <div id="carapasang" class="tab-content">
+            <h3>Cara Menginstal Aplikasi</h3>
+            <ul>
+                <li>Klik tombol hijau <strong>Unduh</strong> di atas untuk mengunduh file <code>zAytoko-installer.exe</code>.</li>
+                <li>Buka hasil unduhan di komputer Windows Anda.</li>
+                <li>Ikuti instruksi instalasi hingga selesai, dan aplikasi Toko zAy siap digunakan!</li>
+            </ul>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Dibuat oleh Irfan Saputra Zai, Sistem Informasi, Universitas Nias Raya.
+        </div>
+
+    </div>
+
+    <!-- Skrip Interaktif Tab -->
+    <script>
+        function switchTab(evt, tabName) {
+            let contents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+            let buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
